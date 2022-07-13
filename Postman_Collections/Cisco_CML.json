@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "cb881b89-ace0-4dc7-bac6-32db4a6c77b9",
+		"name": "Cisco CML",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CML Sandbox Auth",
+			"_postman_id": "e1253bf5-8d3a-404b-a3b1-b5e4a1e63af1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"developer\",\r\n  \"password\": \"C1sco12345\"\r\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": "https://10.10.20.161/api/v0/authenticate"
+			},
+			"response": []
+		},
+		{
+			"name": "CML Get User Info",
+			"_postman_id": "2746dafa-f5aa-4e2c-9c68-7335800fcb74",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb20uY2lzY28udmlybCIsImlhdCI6MTY1NzY5MDAwNiwiZXhwIjoxNjU3Nzc2NDA2LCJzdWIiOiJiNWJhMjBmYi03MTgzLTRmZTgtOGIyZC0yNjkzMjk2MWZiMDcifQ.q4tc8MUyHl7Mcr0p84ChqdMI4_CsLjI0xue7kkY0qAk"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://10.10.20.161/api/v0/users/developer?user_id=developer",
+					"protocol": "https",
+					"host": [
+						"10",
+						"10",
+						"20",
+						"161"
+					],
+					"path": [
+						"api",
+						"v0",
+						"users",
+						"developer"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "developer"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CML Get Interface Info from Node",
+			"_postman_id": "f72da836-7790-4dea-824a-353a4d296540",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://10.10.20.161/api/v0/labs/b4bb2d/nodes/n7/interfaces?data=true",
+					"protocol": "https",
+					"host": [
+						"10",
+						"10",
+						"20",
+						"161"
+					],
+					"path": [
+						"api",
+						"v0",
+						"labs",
+						"b4bb2d",
+						"nodes",
+						"n7",
+						"interfaces"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "data",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CML Get Interface State",
+			"_postman_id": "b8df62aa-2b45-49ff-9c70-6600111041e0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://10.10.20.161/api/v0/labs/b4bb2d/interfaces/14"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb20uY2lzY28udmlybCIsImlhdCI6MTY1NzY5MDAwNiwiZXhwIjoxNjU3Nzc2NDA2LCJzdWIiOiJiNWJhMjBmYi03MTgzLTRmZTgtOGIyZC0yNjkzMjk2MWZiMDcifQ.q4tc8MUyHl7Mcr0p84ChqdMI4_CsLjI0xue7kkY0qAk"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "796840ec-d50d-4a9a-8629-f5c94ca34bdc",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "77cab89d-aa08-487e-a500-23c72d4ca3b0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
