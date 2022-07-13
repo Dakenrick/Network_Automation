@@ -1,0 +1,8 @@
+#Translation: all vowels become "g".
+
+Giraffe Language 
+vowels -> g
+________________
+
+dog -> dgg
+cat -> cgt
