@@ -1,0 +1,88 @@
+vtp ver 1
+vtp domain BREM_SERVFARM
+vtp mode server
+vtp password Br3MeRtOn
+or 
+
+vtp mode client
+
+config t
+spanning-tree extend system-id
+exit
+!
+spanning-tree backbonefast
+exit
+!
+int gi 0/1
+desc <== Trunk_to_LEGACY_DR-01 ==>
+!                     
+int gi 0/3
+desc <== Trunk_to_NEW_DR-01 ==>
+!
+int range gi 0/1 - 2
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 10,20,30
+ switchport trunk native vlan 3
+ switchport mode trunk
+ no negotiation auto
+!
+int range gi 0/1, gi 0/3
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 10,20,30
+ switchport trunk native vlan 3
+ switchport mode trunk
+ no negotiation auto
+ !
+vlan 10   
+ name PC 
+!
+vlan 20   
+ name Servers  
+! 
+vlan 30   
+ name Security
+!
+int range gi0/3,gi1/0 - 3
+ description <== DISABLED ==>
+ switchport access vlan 2
+ switchport mode access
+ shutdown
+ negotiation auto 
+!
+config t
+int gi 0/1
+no shut
+end
+
+int gi 0/3
+shut
+
+
+int range gi0/1-2
+no shut
+
+TASK [Run Python Script to Increase Revision Number] ******************************************************************************************************************************************************
+fatal: [CML_DR_01]: FAILED! => {"changed": true, "msg": "non-zero return code", "rc": 1, "stderr": "  File \"/home/dakenrick/.ansible/tmp/ansible-local-8645xp9k2__e/ansible-tmp-1664520216.4033449-8681-193737937613492/DR_VTP_Revision.py\", line 2\n    print \"Creating VLAN \" + str(n)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nSyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?\n", "stderr_lines": ["  File \"/home/dakenrick/.ansible/tmp/ansible-local-8645xp9k2__e/ansible-tmp-1664520216.4033449-8681-193737937613492/DR_VTP_Revision.py\", line 2", "    print \"Creating VLAN \" + str(n)", "    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^", "SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?"], "stdout": "", "stdout_lines": []}
+
+PLAY RECAP ************************************************************************************************************************************************************************************************
+CML_DR_01                  : ok=2    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0  
+
+TASK [Run Python Script to Increase Revision Number] ******************************************************************************************************************************************************
+fatal: [CML_DR_01]: FAILED! => {"changed": true, "msg": "non-zero return code", "rc": 1, "stderr": "  File \"/home/dakenrick/.ansible/tmp/ansible-local-8956grln472a/ansible-tmp-1664522809.5930424-9013-53759966186096/DR_VTP_Revision.py\", line 5\n    'ip': '192.168.1.200',\n        ^\nSyntaxError: invalid syntax\n", "stderr_lines": ["  File \"/home/dakenrick/.ansible/tmp/ansible-local-8956grln472a/ansible-tmp-1664522809.5930424-9013-53759966186096/DR_VTP_Revision.py\", line 5", "    'ip': '192.168.1.200',", "        ^", "SyntaxError: invalid syntax"], "stdout": "", "stdout_lines": []}
+
+fatal: [CML_DR_01]: FAILED! => {"changed": true, "msg": "non-zero return code", "rc": 1, "stderr": "Traceback (most recent call last):\n  File \"/home/dakenrick/.ansible/tmp/ansible-local-93574kexeoez/ansible-tmp-1664524201.2616334-9414-2128269856853/DR_VTP_Revision.py\", line 17, in <module>\n    output = net_connect.send_conig_set(config_commands)\nAttributeError: 'CiscoIosSSH' object has no attribute 'send_conig_set'. Did you mean: 'send_config_set'?\n", "stderr_lines": ["Traceback (most recent call last):", "  File \"/home/dakenrick/.ansible/tmp/ansible-local-93574kexeoez/ansible-tmp-1664524201.2616334-9414-2128269856853/DR_VTP_Revision.py\", line 17, in <module>", "    output = net_connect.send_conig_set(config_commands)", "AttributeError: 'CiscoIosSSH' object has no attribute 'send_conig_set'. Did you mean: 'send_config_set'?"], "stdout": "Creating VLAN 900\n", "stdout_lines": ["Creating VLAN 900"]}
+
+
+
+from netmiko import ConnectHandler
+
+DR_01 = {
+    'device_type': 'cisco_ios',
+    'ip': '192.168.1.200',
+    'username': 'cisco',
+    'password': 'cisco123'
+}
+
+output = DR_01.send_command("show vlan brief")
+print(output)
+

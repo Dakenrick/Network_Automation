@@ -1,0 +1,52 @@
+---
+- hosts: CML_DR_01
+  gather_facts: no
+  connection: network_cli
+
+  tasks:
+
+  - name: Write Mem Before Changes
+    cisco.ios.ios_command:
+      commands:
+      - write memory
+    register: command_result
+
+  - name: No Shut Trunk Ints To ASs
+    cisco.ios.ios_config:
+      lines:
+      - no shutdown
+      parents: '{{ item }}'
+    with_items:   
+      - interface GigabitEthernet0/1
+      - interface GigabitEthernet0/2
+    register: No_Shut_Trunk_Ints_To_ASs
+    vars:
+      ansible_persistent_log_messages: True
+
+  - name: Show Trunk Result
+    debug: var=No_Shut_Trunk_Ints_To_ASs
+
+  - name: Run Python Script to Increase Revision Number
+    script: ./Scripts/DR_VTP_Revision.py
+    args:
+      executable: python3
+
+  - name: Show Trunk, Vlan DB, and VTP Status
+    cisco.ios.ios_command:
+      commands:
+      - show interfaces trunk
+      - show vlan brief
+      - show vtp status
+    register: after_vtp
+    vars:
+      ansible_persistent_log_messages: True
+
+  - name: Show After VTP Results
+    debug: var=after_vtp
+
+  - name: Save Config Off Device
+    cisco.ios.ios_config:
+      backup: yes
+      backup_options:
+        filename: "{{ inventory_hostname }}_DR_01_backup.txt "
+        dir_path: "/home/dakenrick/Ansible_Playbooks/Backups" 

@@ -1,0 +1,12 @@
+[cmlvms:vars]
+ansible_user=cisco
+ansible_password=cisco123
+ansible_network_os=ios
+ansible_connection=network_cli
+ansible_python_interpreter=/usr/bin/python3
+
+[cmlvms]
+CML_DR_01 ansible_host=192.168.1.200
+CML_AS-01 ansible_host=192.168.1.201
+CML_AS-02 ansible_host=192.168.1.202
+CML_LEGACY_DR_01 ansible_host=192.168.1.203
