@@ -1,0 +1,57 @@
+---
+- hosts: WWT_OS_01,WWT_IS_02a
+  gather_facts: no
+  connection: network_cli
+
+  tasks:
+
+  - name: Run Health Check Commands on Phase 1 Devices OS-01 and IS-02
+    cisco.ios.ios_command:
+      commands:
+      - show environment status
+      - show power detail
+      - show processes cpu
+      - show processes memory
+      - show logging last 20
+      - show license summary
+      - show hardware led
+      - show interfaces counters errors
+    register: OS01_IS02_Health_Check
+    vars:
+      ansible_persistent_log_messages: True
+      ansible_command_timeout: 1200
+
+  - name: Copy OS01 and IS02 Health Check Output to File
+    lineinfile:
+      create: yes
+      line: "{{item}}"
+      path: ./Health-Check/{{ inventory_hostname }}.ios
+    with_items: "{{ OS01_IS02_Health_Check.stdout }}"
+
+- hosts: WWT_PR_01,WWT_PR_02
+  gather_facts: no
+  connection: network_cli
+
+  tasks:
+
+  - name: Run Health Check Commands on Phase 1 Devices PR-01 and PR-02
+    cisco.iosxr.iosxr_command:
+      commands:
+      - show logging last 20
+      - show processes cpu
+      - show processes memory
+      - admin show environment all
+      - show interfaces detail
+      - admin show led
+      - admin show power budget profile
+    register: PR01_PR02_Health_Check
+    vars:
+      ansible_persistent_log_messages: True
+      ansible_command_timeout: 1200
+
+  - name: Copy PR01 and PR02 Health Check Output to File
+    lineinfile:
+      create: yes
+      line: "{{item}}"
+      path: ./Health-Check/{{ inventory_hostname }}.ios
+    with_items: "{{ PR01_PR02_Health_Check.stdout }}"
