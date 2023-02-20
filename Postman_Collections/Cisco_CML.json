@@ -93,13 +93,13 @@
 					}
 				],
 				"url": {
-					"raw": "https://192.168.1.105:443/restconf/data/Cisco-IOS-XE-native:native/logging/monitor/severity",
+					"raw": "https://192.168.1.200:443/restconf/data/Cisco-IOS-XE-native:native/logging/monitor/severity",
 					"protocol": "https",
 					"host": [
 						"192",
 						"168",
 						"1",
-						"105"
+						"200"
 					],
 					"port": "443",
 					"path": [
