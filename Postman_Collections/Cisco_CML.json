@@ -80,24 +80,29 @@
 					}
 				},
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/yang-data+json",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "https://10.10.20.161/api/v0/labs/b4bb2d/nodes/n7/interfaces?data=true",
+					"raw": "https://192.168.1.200/restconf/data/Cisco-IOS-XE-native:native/logging/monitor/severity",
 					"protocol": "https",
 					"host": [
-						"10",
-						"10",
-						"20",
-						"161"
+						"192",
+						"168",
+						"1",
+						"200"
 					],
 					"path": [
-						"api",
-						"v0",
-						"labs",
-						"b4bb2d",
-						"nodes",
-						"n7",
-						"interfaces"
+						"restconf",
+						"data",
+						"Cisco-IOS-XE-native:native",
+						"logging",
+						"monitor",
+						"severity"
 					],
 					"query": [
 						{
@@ -105,10 +110,6 @@
 							"value": null,
 							"type": "text",
 							"disabled": true
-						},
-						{
-							"key": "data",
-							"value": "true"
 						}
 					]
 				}
