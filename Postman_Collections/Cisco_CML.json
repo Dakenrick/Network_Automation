@@ -85,6 +85,11 @@
 						"key": "Content-Type",
 						"value": "application/yang-data+json",
 						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/yang-data+json",
+						"type": "text"
 					}
 				],
 				"url": {
