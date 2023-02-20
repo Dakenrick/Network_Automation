@@ -7,7 +7,7 @@
 	"item": [
 		{
 			"name": "CML Sandbox Auth",
-			"_postman_id": "e1253bf5-8d3a-404b-a3b1-b5e4a1e63af1",
+			"id": "e1253bf5-8d3a-404b-a3b1-b5e4a1e63af1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -19,10 +19,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"username\": \"developer\",\r\n  \"password\": \"C1sco12345\"\r\n}",
-					"options": {
-						"raw": {}
-					}
+					"raw": "{\r\n  \"username\": \"developer\",\r\n  \"password\": \"C1sco12345\"\r\n}"
 				},
 				"url": "https://10.10.20.161/api/v0/authenticate"
 			},
@@ -30,7 +27,7 @@
 		},
 		{
 			"name": "CML Get User Info",
-			"_postman_id": "2746dafa-f5aa-4e2c-9c68-7335800fcb74",
+			"id": "2746dafa-f5aa-4e2c-9c68-7335800fcb74",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -70,11 +67,18 @@
 		},
 		{
 			"name": "CML Get Interface Info from Node",
-			"_postman_id": "f72da836-7790-4dea-824a-353a4d296540",
+			"id": "f72da836-7790-4dea-824a-353a4d296540",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "cisco123",
+						"username": "cisco"
+					}
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -113,7 +117,7 @@
 		},
 		{
 			"name": "CML Get Interface State",
-			"_postman_id": "b8df62aa-2b45-49ff-9c70-6600111041e0",
+			"id": "b8df62aa-2b45-49ff-9c70-6600111041e0",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
