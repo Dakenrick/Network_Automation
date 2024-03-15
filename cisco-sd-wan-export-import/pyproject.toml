@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "cisco-sd-wan-export-import"
+version = "0.1.0"
+description = ""
+authors = ["Chun Lu <chun.y.lu.civ@us.navy.mil>"]
+readme = "README.md"
+packages = [{include = "cisco_sd_wan_export_import"}]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+requests = "2.21.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
