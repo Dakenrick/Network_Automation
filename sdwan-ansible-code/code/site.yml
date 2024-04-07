@@ -1,0 +1,14 @@
+- name: SDWAN DevNet Sandbox
+  hosts: all
+  connection: local
+  gather_facts: no
+
+
+- import_playbook: playbooks/learning_lab_1.yml
+
+- import_playbook: playbooks/learning_lab_2.yml
+
+- import_playbook: playbooks/learning_lab_3.yml
+
+#- import_playbook: playbooks/learning_lab_4.yml
+#  tags: lab4

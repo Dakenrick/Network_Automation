@@ -1,4 +1,3 @@
-_ansible.cnf 
 FROM williamyeh/ansible:centos7
 USER root
 
@@ -11,3 +10,4 @@ RUN mkdir /home/devnet
 WORKDIR /home/devnet
 
 ENTRYPOINT ["ansible-playbook", "site.yml"]
+
